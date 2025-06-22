@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         ARTIFACT_ID = 'elearn-web'
-        VERSION = '1.0.${BUILD_NUMBER}'
+        VERSION = "1.0.${BUILD_NUMBER}"
         FILE_NAME = "${ARTIFACT_ID}.war"
         FILE_PATH = "target/${FILE_NAME}"
         GROUP_ID = 'in.karthik'
@@ -25,7 +25,7 @@ pipeline {
             steps {
                 echo '🔨 Building WAR file...'
                 sh 'mvn clean package'
-                sh 'ls -l target/' // for visibility in Jenkins logs
+                sh 'ls -l target/' // Show files in build dir
             }
         }
 
@@ -57,11 +57,9 @@ pipeline {
                     scp ${FILE_PATH} root@${TOMCAT_IP}:/tmp/
 
                     echo '🧹 Cleaning old deployment and redeploying...'
-                    ssh root@${TOMCAT_IP} <<EOF
-                        rm -rf ${TOMCAT_WEBAPPS}/${ARTIFACT_ID}
-                        cp /tmp/${FILE_NAME} ${TOMCAT_WEBAPPS}/
-                        rm /tmp/${FILE_NAME}
-                    EOF
+                    ssh root@${TOMCAT_IP} "rm -rf ${TOMCAT_WEBAPPS}/${ARTIFACT_ID} ${TOMCAT_WEBAPPS}/${ARTIFACT_ID}.war && \
+                                            cp /tmp/${FILE_NAME} ${TOMCAT_WEBAPPS}/${ARTIFACT_ID}.war && \
+                                            rm /tmp/${FILE_NAME}"
                     """
                 }
             }
