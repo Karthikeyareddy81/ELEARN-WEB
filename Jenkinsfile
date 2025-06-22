@@ -11,7 +11,7 @@ pipeline {
         NEXUS_URL = '192.168.56.102:8081'
         CREDENTIALS_ID = 'nexus3'
         TOMCAT_IP = '192.168.56.102'
-        TOMCAT_WEBAPPS = '/opt/tomcat/webapps'
+        TOMCAT_WEBAPPS = '/opt/tomcat9/webapps'
     }
 
     stages {
