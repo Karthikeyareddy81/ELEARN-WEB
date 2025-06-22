@@ -4,7 +4,7 @@ pipeline {
     environment {
         ARTIFACT_ID = 'elearn-web'
         VERSION = '1.0.0'
-        FILE_NAME = "${ARTIFACT_ID}-${VERSION}.war"
+        FILE_NAME = "${ARTIFACT_ID}.war"
         FILE_PATH = "target/${FILE_NAME}"
         GROUP_ID = 'in.karthik'
         REPO = 'webapp-releases'
