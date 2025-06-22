@@ -16,7 +16,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'dev1', url: 'https://github.com/Karthikeyareddy81/elearn_website.git'
+                git branch: 'dev1', url: 'https://github.com/Karthikeyareddy81/ELEARN-WEB.git'
             }
         }
 
